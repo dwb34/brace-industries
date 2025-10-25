@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Writing - Brace Industries{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="page-header">
+        <h1>Writing</h1>
+        <p>Thoughts on technology, design, and building things.</p>
+    </section>
+
+    {% if posts %}
+    <section class="all-posts">
+        <ul class="post-list">
+            {% for post in posts %}
+            <li class="post-item">
+                <a href="{{ post.url }}" class="post-link">
+                    <h2>{{ post.title }}</h2>
+                    <time datetime="{{ post.date.strftime('%Y-%m-%d') }}">
+                        {{ post.date.strftime('%B %d, %Y') }}
+                    </time>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% else %}
+    <p class="no-posts">No posts yet. Check back soon!</p>
+    {% endif %}
+</div>
+{% endblock %}

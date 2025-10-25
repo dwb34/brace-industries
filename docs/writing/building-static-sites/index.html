@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Static Sites in 2025 - Brace Industries</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <a href="/" class="logo">Brace Industries</a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/writing/">Writing</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        
+<div class="container">
+    <article class="post">
+        <header class="post-header">
+            <h1>Building Static Sites in 2025</h1>
+            <time datetime="2025-10-20">
+                October 20, 2025
+            </time>
+        </header>
+
+        <div class="post-content">
+            <h1>Building Static Sites in 2025</h1>
+<p>Static site generators have evolved significantly over the years. This post explores why they remain relevant and how to build one from scratch.</p>
+<h2>Why Static Sites?</h2>
+<p>Static sites offer several advantages:</p>
+<ol>
+<li><strong>Performance</strong>: No server-side processing means faster load times</li>
+<li><strong>Security</strong>: Reduced attack surface with no database or server logic</li>
+<li><strong>Simplicity</strong>: Easy to version control and deploy</li>
+<li><strong>Cost</strong>: Can be hosted for free on platforms like GitHub Pages</li>
+</ol>
+<h2>The Core Components</h2>
+<p>A basic static site generator needs:</p>
+<ul>
+<li><strong>Markdown Parser</strong>: Convert markdown to HTML</li>
+<li><strong>Template Engine</strong>: Generate consistent page layouts</li>
+<li><strong>Build System</strong>: Process content and output static files</li>
+</ul>
+<h2>Our Implementation</h2>
+<p>This site uses:
+- Python for the build script
+- Jinja2 for templating
+- Markdown with YAML front-matter for content</p>
+<pre class="codehilite"><code class="language-python"># Example: Loading a post
+post = Post('content/posts/my-post.md')
+print(post.title, post.date)
+</code></pre>
+
+<h2>Design Philosophy</h2>
+<p>The design emphasizes:
+- <strong>Minimalism</strong>: Clean, distraction-free reading experience
+- <strong>Typography</strong>: Readable serif fonts for body text
+- <strong>Color</strong>: Warm, inviting palette inspired by natural tones</p>
+<h2>Conclusion</h2>
+<p>Building your own static site generator is a rewarding exercise. It gives you complete control over your content and workflow while keeping things simple.</p>
+<p>Try it out and make it your own!</p>
+        </div>
+
+        <footer class="post-footer">
+            <a href="/writing/" class="back-link">← Back to all posts</a>
+        </footer>
+    </article>
+</div>
+
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2025 Brace Industries. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
