@@ -4,8 +4,6 @@ date: 2025-10-25
 published: true
 ---
 
-# Welcome to Brace Industries
-
 This is a sample blog post to demonstrate the static site generator. You can write your content using **Markdown** syntax.
 
 ## Getting Started

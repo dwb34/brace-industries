@@ -184,18 +184,15 @@ main {
 }
 
 .post-item {
-    margin-bottom: var(--spacing-lg);
-    padding-bottom: var(--spacing-md);
-    border-bottom: 1px solid var(--color-border);
-}
-
-.post-item:last-child {
-    border-bottom: none;
+    margin-bottom: var(--spacing-sm);
 }
 
 .post-link {
-    display: block;
+    display: flex;
+    align-items: baseline;
+    gap: var(--spacing-sm);
     color: var(--color-text);
+    text-decoration: none;
 }
 
 .post-link:hover h2,
@@ -205,15 +202,17 @@ main {
 
 .post-item h2,
 .post-item h3 {
-    font-size: 1.5rem;
-    margin-bottom: var(--spacing-xs);
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
     transition: color 0.2s ease;
 }
 
 .post-item time {
     font-family: var(--font-sans);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--color-text-light);
+    white-space: nowrap;
 }
 
 .view-all {

@@ -4,8 +4,6 @@ date: 2025-10-20
 published: true
 ---
 
-# Building Static Sites in 2025
-
 Static site generators have evolved significantly over the years. This post explores why they remain relevant and how to build one from scratch.
 
 ## Why Static Sites?

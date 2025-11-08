@@ -16,9 +16,7 @@
             <li class="post-item">
                 <a href="{{ post.url }}" class="post-link">
                     <h2>{{ post.title }}</h2>
-                    <time datetime="{{ post.date.strftime('%Y-%m-%d') }}">
-                        {{ post.date.strftime('%B %d, %Y') }}
-                    </time>
+                    <time datetime="{{ post.date.strftime('%Y-%m-%d') }}">{{ post.date.strftime('%b %d, %Y') }}</time>
                 </a>
             </li>
             {% endfor %}
