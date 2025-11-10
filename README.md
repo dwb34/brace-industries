@@ -5,7 +5,9 @@ A minimal, elegant static site generator for personal blogs and project showcase
 ## Features
 
 - 📝 Markdown-based content with YAML front-matter
+- 🖼️ Image support in articles with automatic asset management
 - 🎨 Clean, responsive design with warm terracotta and cream color palette
+- 🎯 Custom favicon for professional branding
 - 📁 Draft and published post management
 - 🚀 GitHub Pages deployment ready
 - 🛠️ Simple CLI for building, serving, and publishing
@@ -83,7 +85,9 @@ brace-industries/
 │   └── contact.html       # Contact page
 │
 ├── static/
-│   └── style.css          # Main stylesheet
+│   ├── style.css          # Main stylesheet
+│   ├── favicon.svg        # Site favicon
+│   └── images/            # Images for articles
 │
 └── docs/                  # Generated site (GitHub Pages)
 ```
@@ -143,6 +147,43 @@ brace-industries/
 
 Alternatively, you can use `published: false` in the front-matter of posts in `/content/posts/` to keep them unpublished.
 
+### Adding images to articles
+
+You can easily embed images in your articles using standard markdown syntax:
+
+1. **Add your image** to the `/static/images/` directory:
+   ```bash
+   # Copy your image file
+   cp ~/my-photo.jpg static/images/
+   ```
+
+2. **Reference the image** in your markdown:
+   ```markdown
+   ![Alt text description](/static/images/my-photo.jpg)
+   ```
+
+3. **Supported formats**: JPG, PNG, SVG, GIF, and any web-compatible image format
+
+**Example:**
+```markdown
+---
+title: My Photo Blog Post
+date: 2025-10-25
+---
+
+Check out this amazing diagram:
+
+![Architecture Diagram](/static/images/architecture.svg)
+
+The image above shows our system architecture.
+```
+
+**Best practices:**
+- Use descriptive alt text for accessibility
+- Optimize images for web (compress large files)
+- Use SVG for diagrams and logos when possible
+- Store all images in `/static/images/` for organization
+
 ## Customization
 
 ### Update contact information
@@ -164,6 +205,31 @@ Replace "Brace Industries" in:
 - `templates/base.html` (logo and title)
 - `templates/home.html` (page title)
 - Other template files as needed
+
+### Customize the favicon
+The site includes a simple SVG favicon (`/static/favicon.svg`) with a "B" on a terracotta background. To customize it:
+
+1. **Replace the SVG file** with your own design:
+   ```bash
+   # Overwrite with your favicon
+   cp ~/my-favicon.svg static/favicon.svg
+   ```
+
+2. **Or create a new one** by editing `/static/favicon.svg`:
+   ```svg
+   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+     <rect width="100" height="100" fill="#C1665A"/>
+     <text x="50" y="70" font-family="serif" font-size="60"
+           font-weight="bold" text-anchor="middle" fill="#F5F1E8">B</text>
+   </svg>
+   ```
+
+3. **Use PNG or ICO format** (optional):
+   - Save your favicon as `favicon.png` or `favicon.ico`
+   - Update the link in `templates/base.html`:
+     ```html
+     <link rel="icon" type="image/png" href="/static/favicon.png">
+     ```
 
 ## Deployment to GitHub Pages
 

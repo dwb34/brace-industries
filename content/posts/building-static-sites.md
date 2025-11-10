@@ -23,6 +23,10 @@ A basic static site generator needs:
 - **Template Engine**: Generate consistent page layouts
 - **Build System**: Process content and output static files
 
+Here's a visual representation of the build flow:
+
+![Static Site Generator Flow Diagram](/static/images/sample-diagram.svg)
+
 ## Our Implementation
 
 This site uses:
