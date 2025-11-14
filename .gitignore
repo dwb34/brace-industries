@@ -50,3 +50,5 @@ ENV/
 # Temporary files
 *.log
 *.tmp
+
+content/drafts/

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Bitter Lesson of Data Warehousing - Brace Industries</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <a href="/" class="logo">Brace Industries</a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/writing/">Writing</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        
+<div class="container">
+    <article class="post">
+        <header class="post-header">
+            <h1>The Bitter Lesson of Data Warehousing</h1>
+            <time datetime="2025-11-07">
+                November 07, 2025
+            </time>
+        </header>
+
+        <div class="post-content">
+            <p>On a late Friday afternoon a wise data modeler on my team said a line that I don’t think I’ll ever forget.</p>
+<blockquote>
+<p>Guys, you are bending over backwards to fix things in your warehouse, when you really should be concerned that you’re paying claims for people who aren’t in your membership system.</p>
+</blockquote>
+<p>The whole call the client team was going on and on how they need to explore all these different convoluted ways to preserve the “referential integrity” and get the best possible match rate of tagging members to medical claims. There might have even been a mention of SCD type 3. </p>
+<p>I think my collague had enough and carried on saying:</p>
+<blockquote>
+<p>I could have some dummy plan in your system, and have been getting free healthcare for years. Don’t you think that’s the problem you should be solving.</p>
+</blockquote>
+<p>Later I was chatting with him and he mentioned this was the classic case of smart junior people trying to solve for the problem right in front of them. Which is why this is such a bitter lesson. No matter how well you design, model, and build your data warehouse, if the source systems you are working with are poorly designed there’s nothing you can do about having bad data.</p>
+<p>The whole team was optimizing for having the highest match rate where the true insight should have been “We're paying $XXM in claims for people we have no idea if they are our members“.</p>
+        </div>
+
+        <footer class="post-footer">
+            <a href="/writing/" class="back-link">← Back to all posts</a>
+        </footer>
+    </article>
+</div>
+
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2025 Brace Industries. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
