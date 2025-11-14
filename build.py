@@ -24,6 +24,12 @@ TEMPLATES_DIR = Path('templates')
 STATIC_DIR = Path('static')
 OUTPUT_DIR = Path('docs')
 
+# Base URL configuration
+# - For local development with --serve: use empty string ""
+# - For custom domain: use empty string "" (works with root domain)
+# - For GitHub Pages subdirectory: use "/repo-name" (e.g., "/brace-industries")
+BASE_URL = os.environ.get('BASE_URL', '')
+
 
 class Post:
     """Represents a blog post with metadata and content."""
@@ -78,7 +84,7 @@ class Post:
 
     @property
     def url(self):
-        return f'/writing/{self.slug}/'
+        return f'{BASE_URL}/writing/{self.slug}/'
 
 
 class SiteGenerator:
@@ -132,7 +138,7 @@ class SiteGenerator:
         template = self.env.get_template('home.html')
         recent_posts = self.posts[:5]  # Show 5 most recent
 
-        html = template.render(posts=recent_posts)
+        html = template.render(posts=recent_posts, base_url=BASE_URL)
 
         output_file = OUTPUT_DIR / 'index.html'
         output_file.write_text(html, encoding='utf-8')
@@ -142,7 +148,7 @@ class SiteGenerator:
         """Generate writing index page."""
         template = self.env.get_template('writing.html')
 
-        html = template.render(posts=self.posts)
+        html = template.render(posts=self.posts, base_url=BASE_URL)
 
         writing_dir = OUTPUT_DIR / 'writing'
         writing_dir.mkdir(exist_ok=True)
@@ -155,7 +161,7 @@ class SiteGenerator:
         template = self.env.get_template('post.html')
 
         for post in self.posts:
-            html = template.render(post=post)
+            html = template.render(post=post, base_url=BASE_URL)
 
             post_dir = OUTPUT_DIR / 'writing' / post.slug
             post_dir.mkdir(parents=True, exist_ok=True)
@@ -167,7 +173,7 @@ class SiteGenerator:
         """Generate contact page."""
         template = self.env.get_template('contact.html')
 
-        html = template.render()
+        html = template.render(base_url=BASE_URL)
 
         output_file = OUTPUT_DIR / 'contact.html'
         output_file.write_text(html, encoding='utf-8')
