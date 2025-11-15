@@ -4,14 +4,14 @@ A minimal, elegant static site generator for personal blogs and project showcase
 
 ## Features
 
-- 📝 Markdown-based content with YAML front-matter
-- 🖼️ Image support in articles with automatic asset management
-- 🎨 Clean, responsive design with warm terracotta and cream color palette
-- 🎯 Custom favicon for professional branding
-- 📁 Draft and published post management
-- 🚀 GitHub Pages deployment ready
-- 🛠️ Simple CLI for building, serving, and publishing
-- 📱 Mobile-first responsive design
+- Markdown-based content with YAML front-matter
+- Image support in articles with automatic asset management
+- Clean, responsive design with warm terracotta and cream color palette
+- Custom favicon for professional branding
+- Draft and published post management
+- GitHub Pages deployment ready
+- Simple CLI for building, serving, and publishing
+- Mobile-first responsive design
 
 ## Quick Start
 
@@ -257,13 +257,6 @@ The site includes a simple SVG favicon (`/static/favicon.svg`) with a "B" on a t
    ```
    https://USERNAME.github.io/brace-industries/
    ```
-
-## Design Philosophy
-
-The design is inspired by:
-- **darioamodei.com**: Minimal, single-column layout with focus on content
-- **Living Roots Wine Co**: Warm terracotta and cream color palette
-- **Works in Progress**: Soft, warm background tones for readability
 
 Typography emphasizes readability with clean serif fonts for body text and sans-serif for headings.
 
