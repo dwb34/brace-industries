@@ -1,6 +1,6 @@
 # Brace Industries Static Site Generator
 
-A minimal, elegant static site generator for personal blogs and project showcases. Built with Python, featuring markdown parsing, Jinja2 templating, and a warm, professional design inspired by Living Roots Wine Co.
+A minimal, elegant static site generator for personal blogs and project showcases. Built with Python, featuring markdown parsing, Jinja2 templating.
 
 ## Features
 
