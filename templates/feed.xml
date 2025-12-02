@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Brace Industries</title>
+    <link>https://braceindustries.com/</link>
+    <description>Thoughts on software, data, and building things</description>
+    <language>en-us</language>
+    <lastBuildDate>{{ build_date }}</lastBuildDate>
+    <atom:link href="https://braceindustries.com/feed.xml" rel="self" type="application/rss+xml"/>
+
+    {% for post in posts %}
+    <item>
+      <title>{{ post.title }}</title>
+      <link>https://braceindustries.com{{ post.url }}</link>
+      <guid>https://braceindustries.com{{ post.url }}</guid>
+      <pubDate>{{ post.date.strftime('%a, %d %b %Y 00:00:00 GMT') }}</pubDate>
+      <description><![CDATA[{{ post.html_content }}]]></description>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>

@@ -129,6 +129,7 @@ class SiteGenerator:
         self._generate_writing_index()
         self._generate_posts()
         self._generate_contact()
+        self._generate_rss()
 
         print(f"✓ Built {len(self.posts)} posts")
         print(f"✓ Site generated in {OUTPUT_DIR}/")
@@ -177,6 +178,17 @@ class SiteGenerator:
 
         output_file = OUTPUT_DIR / 'contact.html'
         output_file.write_text(html, encoding='utf-8')
+        print(f"  Generated: {output_file}")
+
+    def _generate_rss(self):
+        """Generate RSS feed."""
+        template = self.env.get_template('feed.xml')
+
+        build_date = datetime.now().strftime('%a, %d %b %Y %H:%M:%S GMT')
+        xml = template.render(posts=self.posts, build_date=build_date)
+
+        output_file = OUTPUT_DIR / 'feed.xml'
+        output_file.write_text(xml, encoding='utf-8')
         print(f"  Generated: {output_file}")
 
     def serve(self, port=3000):
