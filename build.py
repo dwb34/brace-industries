@@ -30,6 +30,10 @@ OUTPUT_DIR = Path('docs')
 # - For GitHub Pages subdirectory: use "/repo-name" (e.g., "/brace-industries")
 BASE_URL = os.environ.get('BASE_URL', '')
 
+# Custom domain for GitHub Pages (creates CNAME file)
+# Set to empty string to disable CNAME generation
+CUSTOM_DOMAIN = os.environ.get('CUSTOM_DOMAIN', 'braceindustries.com')
+
 
 class Post:
     """Represents a blog post with metadata and content."""
@@ -116,6 +120,12 @@ class SiteGenerator:
         if OUTPUT_DIR.exists():
             shutil.rmtree(OUTPUT_DIR)
         OUTPUT_DIR.mkdir()
+
+        # Create CNAME file for custom domain
+        if CUSTOM_DOMAIN:
+            cname_file = OUTPUT_DIR / 'CNAME'
+            cname_file.write_text(CUSTOM_DOMAIN, encoding='utf-8')
+            print(f"  Generated: {cname_file}")
 
         # Copy static files
         if STATIC_DIR.exists():

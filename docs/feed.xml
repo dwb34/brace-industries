@@ -5,7 +5,7 @@
     <link>https://braceindustries.com/</link>
     <description>Thoughts on software, data, and building things</description>
     <language>en-us</language>
-    <lastBuildDate>Tue, 02 Dec 2025 04:16:44 GMT</lastBuildDate>
+    <lastBuildDate>Tue, 09 Dec 2025 20:27:49 GMT</lastBuildDate>
     <atom:link href="https://braceindustries.com/feed.xml" rel="self" type="application/rss+xml"/>
 
     
@@ -32,87 +32,7 @@
       <link>https://braceindustries.com/writing/welcome/</link>
       <guid>https://braceindustries.com/writing/welcome/</guid>
       <pubDate>Sat, 25 Oct 2025 00:00:00 GMT</pubDate>
-      <description><![CDATA[<p>This is a sample blog post to demonstrate the static site generator. You can write your content using <strong>Markdown</strong> syntax.</p>
-<h2>Getting Started</h2>
-<p>Here are some things you can do with Markdown:</p>
-<ul>
-<li>Create <strong>bold</strong> and <em>italic</em> text</li>
-<li>Add <a href="https://example.com">links</a></li>
-<li>Include images</li>
-<li>Write code blocks</li>
-</ul>
-<h2>Code Examples</h2>
-<p>Here's a Python code snippet:</p>
-<pre class="codehilite"><code class="language-python">def hello_world():
-    print(&quot;Hello from Brace Industries!&quot;)
-
-hello_world()
-</code></pre>
-
-<h2>Blockquotes</h2>
-<blockquote>
-<p>"The best time to plant a tree was 20 years ago. The second best time is now."
-— Chinese Proverb</p>
-</blockquote>
-<h2>Lists</h2>
-<h3>Ordered List</h3>
-<ol>
-<li>First item</li>
-<li>Second item</li>
-<li>Third item</li>
-</ol>
-<h3>Unordered List</h3>
-<ul>
-<li>Coffee</li>
-<li>Tea</li>
-<li>Milk</li>
-</ul>
-<h2>Next Steps</h2>
-<p>Edit this file at <code>content/posts/welcome.md</code> or create your own posts in the <code>content/posts/</code> directory. Use <code>content/drafts/</code> for work-in-progress posts.</p>
-<p>Happy writing!</p>]]></description>
-    </item>
-    
-    <item>
-      <title>Building Static Sites in 2025</title>
-      <link>https://braceindustries.com/writing/building-static-sites/</link>
-      <guid>https://braceindustries.com/writing/building-static-sites/</guid>
-      <pubDate>Mon, 20 Oct 2025 00:00:00 GMT</pubDate>
-      <description><![CDATA[<p>Static site generators have evolved significantly over the years. This post explores why they remain relevant and how to build one from scratch.</p>
-<h2>Why Static Sites?</h2>
-<p>Static sites offer several advantages:</p>
-<ol>
-<li><strong>Performance</strong>: No server-side processing means faster load times</li>
-<li><strong>Security</strong>: Reduced attack surface with no database or server logic</li>
-<li><strong>Simplicity</strong>: Easy to version control and deploy</li>
-<li><strong>Cost</strong>: Can be hosted for free on platforms like GitHub Pages</li>
-</ol>
-<h2>The Core Components</h2>
-<p>A basic static site generator needs:</p>
-<ul>
-<li><strong>Markdown Parser</strong>: Convert markdown to HTML</li>
-<li><strong>Template Engine</strong>: Generate consistent page layouts</li>
-<li><strong>Build System</strong>: Process content and output static files</li>
-</ul>
-<p>Here's a visual representation of the build flow:</p>
-<p><img alt="Static Site Generator Flow Diagram" src="/static/images/sample-diagram.svg" /></p>
-<h2>Our Implementation</h2>
-<p>This site uses:
-- Python for the build script
-- Jinja2 for templating
-- Markdown with YAML front-matter for content</p>
-<pre class="codehilite"><code class="language-python"># Example: Loading a post
-post = Post('content/posts/my-post.md')
-print(post.title, post.date)
-</code></pre>
-
-<h2>Design Philosophy</h2>
-<p>The design emphasizes:
-- <strong>Minimalism</strong>: Clean, distraction-free reading experience
-- <strong>Typography</strong>: Readable serif fonts for body text
-- <strong>Color</strong>: Warm, inviting palette inspired by natural tones</p>
-<h2>Conclusion</h2>
-<p>Building your own static site generator is a rewarding exercise. It gives you complete control over your content and workflow while keeping things simple.</p>
-<p>Try it out and make it your own!</p>]]></description>
+      <description><![CDATA[<p>This is a personal blog to showcase my work, and write about the things I'm interested in.</p>]]></description>
     </item>
     
   </channel>
