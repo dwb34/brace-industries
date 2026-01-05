@@ -138,6 +138,8 @@ class SiteGenerator:
         self._generate_home()
         self._generate_writing_index()
         self._generate_posts()
+        self._generate_about()
+        self._generate_projects()
         self._generate_contact()
         self._generate_rss()
 
@@ -179,6 +181,50 @@ class SiteGenerator:
             output_file = post_dir / 'index.html'
             output_file.write_text(html, encoding='utf-8')
             print(f"  Generated: {output_file}")
+
+    def _generate_about(self):
+        """Generate about page."""
+        template = self.env.get_template('about.html')
+        about_file = CONTENT_DIR / 'about.md'
+
+        content = ''
+        if about_file.exists():
+            with open(about_file, 'r', encoding='utf-8') as f:
+                raw_content = f.read()
+
+            # Parse front-matter if present
+            if raw_content.startswith('---'):
+                try:
+                    _, _, body = raw_content.split('---', 2)
+                    raw_content = body.strip()
+                except ValueError:
+                    pass
+
+            # Convert markdown to HTML
+            md = markdown.Markdown(extensions=['extra', 'codehilite', 'meta'])
+            content = md.convert(raw_content)
+
+        html = template.render(content=content, base_url=BASE_URL)
+
+        output_file = OUTPUT_DIR / 'about.html'
+        output_file.write_text(html, encoding='utf-8')
+        print(f"  Generated: {output_file}")
+
+    def _generate_projects(self):
+        """Generate projects page."""
+        template = self.env.get_template('projects.html')
+        projects_file = CONTENT_DIR / 'projects.yaml'
+
+        projects = []
+        if projects_file.exists():
+            with open(projects_file, 'r', encoding='utf-8') as f:
+                projects = yaml.safe_load(f) or []
+
+        html = template.render(projects=projects, base_url=BASE_URL)
+
+        output_file = OUTPUT_DIR / 'projects.html'
+        output_file.write_text(html, encoding='utf-8')
+        print(f"  Generated: {output_file}")
 
     def _generate_contact(self):
         """Generate contact page."""

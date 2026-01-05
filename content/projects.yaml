@@ -1,0 +1,21 @@
+# Projects
+# Add your projects here. Each project should have:
+#   - title: Project name
+#   - description: Brief description
+#   - tech: List of technologies used (optional)
+#   - github: GitHub repository URL (optional)
+#   - url: Live project URL (optional)
+#   - status: active, shipped, or archived (optional)
+
+- title: Brace Industries Blog
+  description: A minimal static site generator built with Python, Markdown, and Jinja2. Designed for simplicity and fast builds.
+  tech: [Python, Markdown, Jinja2]
+  github: https://github.com/braceindustries/brace-industries
+  url: https://braceindustries.com
+  status: active
+
+# Add more projects below:
+# - title: Another Project
+#   description: Description of the project
+#   tech: [Python, PostgreSQL]
+#   github: https://github.com/user/repo
