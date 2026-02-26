@@ -1,20 +1,41 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Brace Industries</title>
-    <link>https://braceindustries.com/</link>
-    <description>Thoughts on software, data, and building things</description>
-    <language>en-us</language>
-    <lastBuildDate>Wed, 25 Feb 2026 19:47:52 GMT</lastBuildDate>
-    <atom:link href="https://braceindustries.com/feed.xml" rel="self" type="application/rss+xml"/>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spec Driven Data Engineering - Brace Industries</title>
+    <link rel="icon" type="image/svg+xml" href="/static/favicon.svg">
+    <link rel="apple-touch-icon" href="/static/favicon.svg">
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="alternate" type="application/rss+xml" title="Brace Industries RSS Feed" href="/feed.xml">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="nav-container">
+                <a href="/" class="logo">Brace Industries</a>
+                <ul class="nav-links">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/writing/">Writing</a></li>
+                    <li><a href="/contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
 
-    
-    <item>
-      <title>Spec Driven Data Engineering</title>
-      <link>https://braceindustries.com/writing/spec-driven-data-engineering/</link>
-      <guid>https://braceindustries.com/writing/spec-driven-data-engineering/</guid>
-      <pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate>
-      <description><![CDATA[<p><em>An auditable collaboration layer between humans and agents built to accelerate data engineering and analytics delivery</em></p>
+    <main>
+        
+<div class="container">
+    <article class="post">
+        <header class="post-header">
+            <h1>Spec Driven Data Engineering</h1>
+            <time datetime="2026-02-25">
+                February 25, 2026
+            </time>
+        </header>
+
+        <div class="post-content">
+            <p><em>An auditable collaboration layer between humans and agents built to accelerate data engineering and analytics delivery</em></p>
 <h2>The Problem</h2>
 <p>Working in data engineering today often feels like a never-ending loop. The PM updates a source-to-target mapping (STTM) document. They hand it over to the dev team. There's something wrong and it goes back to the PM. They fix it, retry, and discover a null scenario nobody thought they had to handle. Rinse and repeat.</p>
 <p>It's an inefficient and slow way of working. It creates an inevitable gap between an excel file (usually awfully formatted, ugly, and hard to read) to what's actually there in the code. Even worse. Excel is the wrong tool: no validation (not even spellcheck!). No version control, and locked into a vendor controlled format that's not easy for a machine to read.</p>
@@ -123,34 +144,21 @@ Grain: one row per calendar_month × age_band × gender × lob × plan_type × r
 <li><strong>Agent reliability for complex transformations</strong> - This I'd bet gets solved by the continued model improvements in software development, but I think this perspective comes down to your confidence in the pace of model improvements.</li>
 </ol>
 <p>These tools are getting more powerful and capable every day, and the rate of progress has been mind blowing. I think there's a ton of work to be done to reorient how software development is done to best take advantage of these new tools. I can see a world where data and analytics no longer is constrained on data engineering effort, but rather deep understanding of the data and problems you are trying to solve.</p>
-<p>This is an opportunity where there is a clear need for tool and/or product to exist to take advantage of a new era of data engineering we're entering. If you're thinking about this problem, I'd love to talk: .</p>]]></description>
-    </item>
-    
-    <item>
-      <title>The Bitter Lesson of Data Warehousing</title>
-      <link>https://braceindustries.com/writing/the-bitter-lesson-of-data-warehousing/</link>
-      <guid>https://braceindustries.com/writing/the-bitter-lesson-of-data-warehousing/</guid>
-      <pubDate>Fri, 07 Nov 2025 00:00:00 GMT</pubDate>
-      <description><![CDATA[<p>On a late Friday afternoon a wise data modeler on my team said a line that I don’t think I’ll ever forget.</p>
-<blockquote>
-<p>Guys, you are bending over backwards to fix things in your warehouse, when you really should be concerned that you’re paying claims for people who aren’t in your membership system.</p>
-</blockquote>
-<p>The whole call the client team was going on and on how they need to explore all these different convoluted ways to preserve the “referential integrity” and get the best possible match rate of tagging members to medical claims. There might have even been a mention of SCD type 3. </p>
-<p>I think my collague had enough and carried on saying:</p>
-<blockquote>
-<p>I could have some dummy plan in your system, and have been getting free healthcare for years. Don’t you think that’s the problem you should be solving.</p>
-</blockquote>
-<p>Later I was chatting with him and he mentioned this was the classic case of smart junior people trying to solve for the problem right in front of them. Which is why this is such a bitter lesson. No matter how well you design, model, and build your data warehouse, if the source systems you are working with are poorly designed there’s nothing you can do about having bad data.</p>
-<p>The whole team was optimizing for having the highest match rate where the true insight should have been “We're paying $XXM in claims for people we have no idea if they are our members“.</p>]]></description>
-    </item>
-    
-    <item>
-      <title>Welcome to Brace Industries</title>
-      <link>https://braceindustries.com/writing/welcome/</link>
-      <guid>https://braceindustries.com/writing/welcome/</guid>
-      <pubDate>Sat, 25 Oct 2025 00:00:00 GMT</pubDate>
-      <description><![CDATA[<p>This is a personal blog to showcase my work, and write about the things I'm interested in.</p>]]></description>
-    </item>
-    
-  </channel>
-</rss>
+<p>This is an opportunity where there is a clear need for tool and/or product to exist to take advantage of a new era of data engineering we're entering. If you're thinking about this problem, I'd love to talk: .</p>
+        </div>
+
+        <footer class="post-footer">
+            <a href="/writing/" class="back-link">← Back to all posts</a>
+        </footer>
+    </article>
+</div>
+
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <p>&copy; 2025 Brace Industries. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
