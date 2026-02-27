@@ -4,11 +4,11 @@ published: true
 title: The Bitter Lesson of Data Warehousing
 ---
 
-On a late Friday afternoon a wise data modeler on my team said a line that I don’t think I’ll ever forget.
+On a late Friday afternoon a data modeler and architect on my team said a line that I don’t think I’ll ever forget.
 
-> Guys, you are bending over backwards to fix things in your warehouse, when you really should be concerned that you’re paying claims for people who aren’t in your membership system.
+> Guys, you are bending over backwards to fix things in your data warehouse, when you really should be concerned that you’re paying claims for people who aren’t in your membership system.
 
-The whole call the client team was going on and on how they need to explore all these different convoluted ways to preserve the “referential integrity” and get the best possible match rate of tagging members to medical claims. There might have even been a mention of SCD type 3. 
+The whole call the client team was going on and on how they need to explore all these different convoluted ways to preserve the “referential integrity”. They kept discussing how to optimizing for the highest rate of tagging members to medical claims above all else, and what the optimial window function is to use to filter out duplicate member source data. There was never once consider "why are there so many duplicate from the soure" or what happens if the window function guesses wrong.
 
 I think my collague had enough and carried on saying:
 
@@ -16,5 +16,4 @@ I think my collague had enough and carried on saying:
 
 Later I was chatting with him and he mentioned this was the classic case of smart junior people trying to solve for the problem right in front of them. Which is why this is such a bitter lesson. No matter how well you design, model, and build your data warehouse, if the source systems you are working with are poorly designed there’s nothing you can do about having bad data.
 
-The whole team was optimizing for having the highest match rate where the true insight should have been “We're paying $XXM in claims for people we have no idea if they are our members“.  
-
+The whole team was optimizing for having the highest match rate where the true insight should have been “We're paying $10M in claims for people we have no idea if they are our members“.
