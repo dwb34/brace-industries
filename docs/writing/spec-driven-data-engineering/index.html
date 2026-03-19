@@ -49,7 +49,7 @@
 <li><strong>Agentic coding</strong> tools for implementation</li>
 <li><strong>Policy repository</strong> ("constitution") for org-wide standards, glossary, governance rules</li>
 </ol>
-<p>All of this fits directly into the tooling and Software Delivery Life Cycle (SDLC). You can integrate this into CI/CD, you can finally have a clear diff of what changed from a requirement perspective. The whole time you have clear audit trails of everything. This feels like a boring point but is crucial if an agentic programing workflow can be adopted in highly regulated enterprises. </p>
+<p>All of this fits directly into the tooling and Software Delivery Life Cycle (SDLC). You can integrate this into CI/CD, and finally have a clear diff of what changed from a requirement perspective. The whole time you have clear audit trails of everything. This feels like a boring point but is crucial if an agentic programing workflow can be adopted in highly regulated enterprises. </p>
 <p>"I don't know Claude updated the pipeline" is not going to cut it.</p>
 <p>You start by creating a markdown spec document that outlines the requirements for a new analytical data mart: columns, transformations, SLAs, filter criteria etc. This shouldn't be a  manual exercise either, there should be templates, autocomplete, and then ideally a type of "linting" to guide the creator.</p>
 <pre class="codehilite"><code class="language-MARKDOWN"># Spec: gold.enrollment_monthly_summary
@@ -91,7 +91,7 @@ Grain: one row per calendar_month × age_band × gender × lob × plan_type × r
 - Latency: must reflect prior-day enrollment changes
 </code></pre>
 
-<p>The agent then takes the spec and can autogenerate the code, tests, and pipeline. In a matter of minutes you can have a working prototype of the data mart that you can interact with, confirm things are looking good. This can dramatically decrease the iteration cycle time on what you want the end product to look like. </p>
+<p>The agent then takes the spec and can autogenerate the code, tests, and pipeline. In a matter of minutes you can have a working prototype of the data mart that you can interact with, confirm things are looking good. This will dramatically decrease the iteration cycle time on what you want the end product to look like. </p>
 <p>The feedback loop becomes even more powerful because the agent can work with you during the implementation. If it comes across an edge case that the spec didn't outline how to handle, it can ask, propose an approach, and even automatically update the spec. The data pipeline and spec grow organically as the model interacts with the data through its development process.</p>
 <p>It's no longer a back and forth process but a collaboration between you and the agent using the spec to translate between natural language and code.</p>
 <h2>Policy Repository</h2>

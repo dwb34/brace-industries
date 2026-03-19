@@ -5,7 +5,7 @@
     <link>https://braceindustries.com/</link>
     <description>Thoughts on software, data, and building things</description>
     <language>en-us</language>
-    <lastBuildDate>Wed, 25 Feb 2026 19:47:52 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 19 Mar 2026 08:11:25 GMT</lastBuildDate>
     <atom:link href="https://braceindustries.com/feed.xml" rel="self" type="application/rss+xml"/>
 
     
@@ -28,7 +28,7 @@
 <li><strong>Agentic coding</strong> tools for implementation</li>
 <li><strong>Policy repository</strong> ("constitution") for org-wide standards, glossary, governance rules</li>
 </ol>
-<p>All of this fits directly into the tooling and Software Delivery Life Cycle (SDLC). You can integrate this into CI/CD, you can finally have a clear diff of what changed from a requirement perspective. The whole time you have clear audit trails of everything. This feels like a boring point but is crucial if an agentic programing workflow can be adopted in highly regulated enterprises. </p>
+<p>All of this fits directly into the tooling and Software Delivery Life Cycle (SDLC). You can integrate this into CI/CD, and finally have a clear diff of what changed from a requirement perspective. The whole time you have clear audit trails of everything. This feels like a boring point but is crucial if an agentic programing workflow can be adopted in highly regulated enterprises. </p>
 <p>"I don't know Claude updated the pipeline" is not going to cut it.</p>
 <p>You start by creating a markdown spec document that outlines the requirements for a new analytical data mart: columns, transformations, SLAs, filter criteria etc. This shouldn't be a  manual exercise either, there should be templates, autocomplete, and then ideally a type of "linting" to guide the creator.</p>
 <pre class="codehilite"><code class="language-MARKDOWN"># Spec: gold.enrollment_monthly_summary
@@ -70,7 +70,7 @@ Grain: one row per calendar_month × age_band × gender × lob × plan_type × r
 - Latency: must reflect prior-day enrollment changes
 </code></pre>
 
-<p>The agent then takes the spec and can autogenerate the code, tests, and pipeline. In a matter of minutes you can have a working prototype of the data mart that you can interact with, confirm things are looking good. This can dramatically decrease the iteration cycle time on what you want the end product to look like. </p>
+<p>The agent then takes the spec and can autogenerate the code, tests, and pipeline. In a matter of minutes you can have a working prototype of the data mart that you can interact with, confirm things are looking good. This will dramatically decrease the iteration cycle time on what you want the end product to look like. </p>
 <p>The feedback loop becomes even more powerful because the agent can work with you during the implementation. If it comes across an edge case that the spec didn't outline how to handle, it can ask, propose an approach, and even automatically update the spec. The data pipeline and spec grow organically as the model interacts with the data through its development process.</p>
 <p>It's no longer a back and forth process but a collaboration between you and the agent using the spec to translate between natural language and code.</p>
 <h2>Policy Repository</h2>
@@ -124,24 +124,6 @@ Grain: one row per calendar_month × age_band × gender × lob × plan_type × r
 </ol>
 <p>These tools are getting more powerful and capable every day, and the rate of progress has been mind blowing. I think there's a ton of work to be done to reorient how software development is done to best take advantage of these new tools. I can see a world where data and analytics no longer is constrained on data engineering effort, but rather deep understanding of the data and problems you are trying to solve.</p>
 <p>This is an opportunity where there is a clear need for tool and/or product to exist to take advantage of a new era of data engineering we're entering. If you're thinking about this problem, I'd love to talk: .</p>]]></description>
-    </item>
-    
-    <item>
-      <title>The Bitter Lesson of Data Warehousing</title>
-      <link>https://braceindustries.com/writing/the-bitter-lesson-of-data-warehousing/</link>
-      <guid>https://braceindustries.com/writing/the-bitter-lesson-of-data-warehousing/</guid>
-      <pubDate>Fri, 07 Nov 2025 00:00:00 GMT</pubDate>
-      <description><![CDATA[<p>On a late Friday afternoon a wise data modeler on my team said a line that I don’t think I’ll ever forget.</p>
-<blockquote>
-<p>Guys, you are bending over backwards to fix things in your warehouse, when you really should be concerned that you’re paying claims for people who aren’t in your membership system.</p>
-</blockquote>
-<p>The whole call the client team was going on and on how they need to explore all these different convoluted ways to preserve the “referential integrity” and get the best possible match rate of tagging members to medical claims. There might have even been a mention of SCD type 3. </p>
-<p>I think my collague had enough and carried on saying:</p>
-<blockquote>
-<p>I could have some dummy plan in your system, and have been getting free healthcare for years. Don’t you think that’s the problem you should be solving.</p>
-</blockquote>
-<p>Later I was chatting with him and he mentioned this was the classic case of smart junior people trying to solve for the problem right in front of them. Which is why this is such a bitter lesson. No matter how well you design, model, and build your data warehouse, if the source systems you are working with are poorly designed there’s nothing you can do about having bad data.</p>
-<p>The whole team was optimizing for having the highest match rate where the true insight should have been “We're paying $XXM in claims for people we have no idea if they are our members“.</p>]]></description>
     </item>
     
     <item>
