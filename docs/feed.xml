@@ -5,7 +5,7 @@
     <link>https://braceindustries.com/</link>
     <description>Thoughts on software, data, and building things</description>
     <language>en-us</language>
-    <lastBuildDate>Thu, 19 Mar 2026 08:11:25 GMT</lastBuildDate>
+    <lastBuildDate>Mon, 11 May 2026 18:10:24 GMT</lastBuildDate>
     <atom:link href="https://braceindustries.com/feed.xml" rel="self" type="application/rss+xml"/>
 
     
@@ -15,68 +15,68 @@
       <guid>https://braceindustries.com/writing/spec-driven-data-engineering/</guid>
       <pubDate>Wed, 25 Feb 2026 00:00:00 GMT</pubDate>
       <description><![CDATA[<p><em>An auditable collaboration layer between humans and agents built to accelerate data engineering and analytics delivery</em></p>
-<h2>The Problem</h2>
+<h2><a href="#the-problem" aria-hidden="true" class="anchor" id="the-problem"></a>The Problem</h2>
 <p>Working in data engineering today often feels like a never-ending loop. The PM updates a source-to-target mapping (STTM) document. They hand it over to the dev team. There's something wrong and it goes back to the PM. They fix it, retry, and discover a null scenario nobody thought they had to handle. Rinse and repeat.</p>
 <p>It's an inefficient and slow way of working. It creates an inevitable gap between an excel file (usually awfully formatted, ugly, and hard to read) to what's actually there in the code. Even worse. Excel is the wrong tool: no validation (not even spellcheck!). No version control, and locked into a vendor controlled format that's not easy for a machine to read.</p>
-<h2>The Core Idea</h2>
+<h2><a href="#the-core-idea" aria-hidden="true" class="anchor" id="the-core-idea"></a>The Core Idea</h2>
 <p>Advances in LLMs, agentic programming and tools like Claude Code are showing a better solutions. What if instead of having this slow, monotonous, and error prone process the STTMs were plain text specs in structured markdown that agents can read, validate, and implement the code. You have a spec that becomes an executable pipeline, and fits directly into the workflow of the most advanced software engineering teams.</p>
-<h2>How this Could Work</h2>
-<p>The stack I'm envisioning has 4 components: </p>
+<h2><a href="#how-this-could-work" aria-hidden="true" class="anchor" id="how-this-could-work"></a>How this Could Work</h2>
+<p>The stack I'm envisioning has 4 components:</p>
 <ol>
 <li><strong>Markdown specs</strong> with schema-aware UI (autocomplete, validation, naming enforcement)</li>
 <li><strong>Git</strong> for version control and audit trail</li>
 <li><strong>Agentic coding</strong> tools for implementation</li>
-<li><strong>Policy repository</strong> ("constitution") for org-wide standards, glossary, governance rules</li>
+<li><strong>Policy repository</strong> (&quot;constitution&quot;) for org-wide standards, glossary, governance rules</li>
 </ol>
-<p>All of this fits directly into the tooling and Software Delivery Life Cycle (SDLC). You can integrate this into CI/CD, and finally have a clear diff of what changed from a requirement perspective. The whole time you have clear audit trails of everything. This feels like a boring point but is crucial if an agentic programing workflow can be adopted in highly regulated enterprises. </p>
-<p>"I don't know Claude updated the pipeline" is not going to cut it.</p>
-<p>You start by creating a markdown spec document that outlines the requirements for a new analytical data mart: columns, transformations, SLAs, filter criteria etc. This shouldn't be a  manual exercise either, there should be templates, autocomplete, and then ideally a type of "linting" to guide the creator.</p>
-<pre class="codehilite"><code class="language-MARKDOWN"># Spec: gold.enrollment_monthly_summary
-
-## Description
-Monthly enrollment counts aggregated by member demographics and plan attributes.
+<p>All of this fits directly into the tooling and Software Delivery Life Cycle (SDLC). You can integrate this into CI/CD, and finally have a clear diff of what changed from a requirement perspective. The whole time you have clear audit trails of everything. This feels like a boring point but is crucial if an agentic programing workflow can be adopted in highly regulated enterprises.</p>
+<p>&quot;I don't know Claude updated the pipeline&quot; is not going to cut it.</p>
+<p>You start by creating a markdown spec document that outlines the requirements for a new analytical data mart: columns, transformations, SLAs, filter criteria etc. This shouldn't be a  manual exercise either, there should be templates, autocomplete, and then ideally a type of &quot;linting&quot; to guide the creator.</p>
+<pre><code><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-1 syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">#</span> </span><span class="syn-markup syn-heading syn-1 syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">Spec: gold.enrollment_monthly_summary</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span>
+<span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">##</span> </span><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">Description</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span><span class="syn-meta syn-paragraph syn-markdown">Monthly enrollment counts aggregated by member demographics and plan attributes.
 Grain: one row per calendar_month × age_band × gender × lob × plan_type × region.
 
-## Source
-- silver.member_enrollment_scd2
-
-## Columns
-| column | type | description |
-|---|---|---|
-| calendar_month | date | First day of month (2024-01-01) |
-| age_band | string | 0-17, 18-25, 26-44, 45-64, 65+ |
-| gender | string | M, F, U |
-| line_of_business | string | Commercial, Medicare, Medicaid |
-| plan_type | string | HMO, PPO, EPO, POS |
-| region | string | Source: member.service_region |
-| bom_member_count | int | Members active on 1st of month |
-| eom_member_count | int | Members active on last day of month |
-| member_months | decimal | Sum of fractional enrollment months |
-| net_change | int | eom_member_count - bom_member_count |
-
-## Transformation Logic
-- Join member_enrollment_scd2 to dim_date on effective_date/term_date overlap
-- BOM: member has active coverage where effective_date &lt;= first_of_month AND (term_date &gt;= first_of_month OR term_date IS NULL)
-- EOM: same logic against last_day_of_month
-- Member months: days_covered_in_month / days_in_month per member, then sum
-- Age band derived from date_of_birth relative to calendar_month
-
-## Filters
-- Exclude records where enrollment_status = 'voided'
-- Exclude coverage_days &lt; 1 within the month
-
-## SLA
-- Refresh: daily, 06:00 UTC
-- Latency: must reflect prior-day enrollment changes
-</code></pre>
-
-<p>The agent then takes the spec and can autogenerate the code, tests, and pipeline. In a matter of minutes you can have a working prototype of the data mart that you can interact with, confirm things are looking good. This will dramatically decrease the iteration cycle time on what you want the end product to look like. </p>
+</span><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">##</span> </span><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">Source</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"> <span class="syn-meta syn-paragraph syn-list syn-markdown">silver.member_enrollment_scd2
+</span>
+</span><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">##</span> </span><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">Columns</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span><span class="syn-meta syn-block-level syn-markdown"><span class="syn-meta syn-table syn-header syn-markdown"><span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> column <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> type <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> description <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+</span><span class="syn-meta syn-table syn-header-separator syn-markdown"><span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span><span class="syn-punctuation syn-section syn-table-header syn-markdown">---</span><span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span><span class="syn-punctuation syn-section syn-table-header syn-markdown">---</span><span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span><span class="syn-punctuation syn-section syn-table-header syn-markdown">---</span><span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+</span><span class="syn-meta syn-table syn-markdown"><span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> calendar_month <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> date <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> First day of month (2024-01-01) <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+<span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> age_band <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> string <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> 0-17, 18-25, 26-44, 45-64, 65+ <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+<span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> gender <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> string <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> M, F, U <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+<span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> line_of_business <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> string <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> Commercial, Medicare, Medicaid <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+<span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> plan_type <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> string <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> HMO, PPO, EPO, POS <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+<span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> region <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> string <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> Source: member.service_region <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+<span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> bom_member_count <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> int <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> Members active on 1st of month <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+<span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> eom_member_count <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> int <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> Members active on last day of month <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+<span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> member_months <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> decimal <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> Sum of fractional enrollment months <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+<span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> net_change <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> int <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span> eom_member_count - bom_member_count <span class="syn-punctuation syn-separator syn-table-cell syn-markdown">|</span>
+</span></span>
+<span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">##</span> </span><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">Transformation Logic</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"> <span class="syn-meta syn-paragraph syn-list syn-markdown">Join member_enrollment_scd2 to dim_date on effective_date/term_date overlap
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> BOM: member has active coverage where effective_date <span class="syn-meta syn-other syn-valid-bracket syn-markdown">&lt;</span>= first_of_month AND (term_date &gt;= first_of_month OR term_date IS NULL)
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> EOM: same logic against last_day_of_month
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> Member months: days_covered_in_month / days_in_month per member, then sum
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> Age band derived from date_of_birth relative to calendar_month
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown">
+</span><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">##</span> </span><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">Filters</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"> <span class="syn-meta syn-paragraph syn-list syn-markdown">Exclude records where enrollment_status = &#39;voided&#39;
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> Exclude coverage_days <span class="syn-meta syn-other syn-valid-bracket syn-markdown">&lt;</span> 1 within the month
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown">
+</span><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">##</span> </span><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">SLA</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"> <span class="syn-meta syn-paragraph syn-list syn-markdown">Refresh: daily, 06:00 UTC
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> Latency: must reflect prior-day enrollment changes
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown">
+</span></span></code></pre>
+<p>The agent then takes the spec and can autogenerate the code, tests, and pipeline. In a matter of minutes you can have a working prototype of the data mart that you can interact with, confirm things are looking good. This will dramatically decrease the iteration cycle time on what you want the end product to look like.</p>
 <p>The feedback loop becomes even more powerful because the agent can work with you during the implementation. If it comes across an edge case that the spec didn't outline how to handle, it can ask, propose an approach, and even automatically update the spec. The data pipeline and spec grow organically as the model interacts with the data through its development process.</p>
 <p>It's no longer a back and forth process but a collaboration between you and the agent using the spec to translate between natural language and code.</p>
-<h2>Policy Repository</h2>
-<p>A key foundation that makes the vision possible is a well thought through  "Policy Repository". This enables you to guide the agent towards the best way to approach relatively simple problems (naming conventions) to complex problems (access controls or PHI detections). You can codify the standards you'd want a data engineer to follow, and because it's an agent writing the code you know they'll be automatically enforced. </p>
+<h2><a href="#policy-repository" aria-hidden="true" class="anchor" id="policy-repository"></a>Policy Repository</h2>
+<p>A key foundation that makes the vision possible is a well thought through  &quot;Policy Repository&quot;. This enables you to guide the agent towards the best way to approach relatively simple problems (naming conventions) to complex problems (access controls or PHI detections). You can codify the standards you'd want a data engineer to follow, and because it's an agent writing the code you know they'll be automatically enforced.</p>
 <p>Below is an example of how this could look. The agent can then use these to add context to its workflow, and refer to them when it has questions. Think of a <code>CLAUDE.MD</code> on steroids where the agent can load the relevant policy and guidelines based on tags and references within the spec. Policies like naming conventions will almost always be referenced but this can expand to more specific data domain focused policies</p>
-<pre class="codehilite"><code class="language-policy_repo">/policies
+<pre><code><span class="syn-text syn-plain">/policies
   /governance
     access-control.md
     phi-masking.md
@@ -91,31 +91,29 @@ Grain: one row per calendar_month × age_band × gender × lob × plan_type × r
   /transformations
     scd-handling.md
     null-defaults.md
-</code></pre>
-
-<pre class="codehilite"><code class="language-Markdown"># Column Naming Standards
-
-## Rules
-- snake_case, lowercase only
-- Boolean columns: prefix with `is_` or `has_` (e.g., `is_active`, `has_dependent`)
-- Date columns: suffix with `_date` (e.g., `effective_date`, `term_date`)
-- Count columns: suffix with `_count` (e.g., `member_count`, `claim_count`)
-- Identifiers: suffix with `_id` or `_key` (e.g., `member_id`, `plan_sk`)
-- No abbreviations unless in approved glossary (see /governance/glossary.md)
-
-## Prohibited
-- camelCase, PascalCase
-- Generic names: `flag`, `status`, `type` without a prefix (use `enrollment_status`, `plan_type`)
-</code></pre>
-
-<p>Lastly this is the core feature that enables what <a href="https://every.to/@danshipper">Dan Shipper</a> and <a href="https://every.to/@kieran_1355">Kieran Klaassen</a> have called <a href="https://every.to/chain-of-thought/compound-engineering-how-every-codes-with-agents">compound engineering</a>. As you work in this new process you continue to review where the model went wrong, and codify that back into the policy and <code>CLAUDE.MD</code> style documents to ensure similar mistakes won't be made in the future. Effectively you are creating a learning system or flywheel that improves with every implementation cycle. </p>
-<h2>What Changes</h2>
-<p>The role of the data engineer in this world shifts its focus from writing PySpark code towards defining the analytical products that are built, performance tuning, and architecture design. Agents and LLMs write the code and work through the "how" of the implementation. Governance, naming conventions, and other policies are enforced as a byproduct of creating the spec, not 3 months after the fact when someone notices. </p>
+</span></code></pre>
+<pre><code><span class="syn-text syn-html syn-markdown"><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-1 syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">#</span> </span><span class="syn-markup syn-heading syn-1 syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">Column Naming Standards</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span>
+<span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">##</span> </span><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">Rules</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"> <span class="syn-meta syn-paragraph syn-list syn-markdown">snake_case, lowercase only
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> Boolean columns: prefix with <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>is_<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span> or <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>has_<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span> (e.g., <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>is_active<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span>, <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>has_dependent<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span>)
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> Date columns: suffix with <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>_date<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span> (e.g., <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>effective_date<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span>, <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>term_date<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span>)
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> Count columns: suffix with <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>_count<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span> (e.g., <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>member_count<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span>, <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>claim_count<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span>)
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> Identifiers: suffix with <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>_id<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span> or <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>_key<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span> (e.g., <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>member_id<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span>, <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>plan_sk<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span>)
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> No abbreviations unless in approved glossary (see /governance/glossary.md)
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown">
+</span><span class="syn-meta syn-block-level syn-markdown"><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-punctuation syn-definition syn-heading syn-begin syn-markdown">##</span> </span><span class="syn-markup syn-heading syn-2 syn-markdown"><span class="syn-entity syn-name syn-section syn-markdown">Prohibited</span><span class="syn-meta syn-whitespace syn-newline syn-markdown">
+</span></span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"> <span class="syn-meta syn-paragraph syn-list syn-markdown">camelCase, PascalCase
+</span></span><span class="syn-markup syn-list syn-unnumbered syn-bullet syn-markdown"><span class="syn-punctuation syn-definition syn-list_item syn-markdown">-</span></span><span class="syn-markup syn-list syn-unnumbered syn-markdown"><span class="syn-meta syn-paragraph syn-list syn-markdown"> Generic names: <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>flag<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span>, <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>status<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span>, <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>type<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span> without a prefix (use <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>enrollment_status<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span>, <span class="syn-markup syn-raw syn-inline syn-markdown"><span class="syn-punctuation syn-definition syn-raw syn-begin syn-markdown">`</span>plan_type<span class="syn-punctuation syn-definition syn-raw syn-end syn-markdown">`</span></span>)
+</span></span></span></code></pre>
+<p>Lastly this is the core feature that enables what <a href="https://every.to/@danshipper">Dan Shipper</a> and <a href="https://every.to/@kieran_1355">Kieran Klaassen</a> have called <a href="https://every.to/chain-of-thought/compound-engineering-how-every-codes-with-agents">compound engineering</a>. As you work in this new process you continue to review where the model went wrong, and codify that back into the policy and <code>CLAUDE.MD</code> style documents to ensure similar mistakes won't be made in the future. Effectively you are creating a learning system or flywheel that improves with every implementation cycle.</p>
+<h2><a href="#what-changes" aria-hidden="true" class="anchor" id="what-changes"></a>What Changes</h2>
+<p>The role of the data engineer in this world shifts its focus from writing PySpark code towards defining the analytical products that are built, performance tuning, and architecture design. Agents and LLMs write the code and work through the &quot;how&quot; of the implementation. Governance, naming conventions, and other policies are enforced as a byproduct of creating the spec, not 3 months after the fact when someone notices.</p>
 <p>This also enables increased transparency and auditability of the transformations, lineage, and policies in an organization's data warehouse. It's no longer tribal knowledge trapped in the heads of a few people. The audit trail of what is done and why becomes a byproduct of the work, and no longer an annoying word document that no one wants to maintain.</p>
-<h2>Why Now</h2>
-<p>LLMs have reached an inflection point where they are capable enough to make this vision a reality. Anthropic is showing just how far the technology has advanced. If models can <a href="https://www.anthropic.com/engineering/building-c-compiler">write compilers from scratch</a>, I'd bet they can generate a well specified dbt model. With clear instructions and guardrails they can complete tasks that would've taken human engineers days and weeks to complete. </p>
+<h2><a href="#why-now" aria-hidden="true" class="anchor" id="why-now"></a>Why Now</h2>
+<p>LLMs have reached an inflection point where they are capable enough to make this vision a reality. Anthropic is showing just how far the technology has advanced. If models can <a href="https://www.anthropic.com/engineering/building-c-compiler">write compilers from scratch</a>, I'd bet they can generate a well specified dbt model. With clear instructions and guardrails they can complete tasks that would've taken human engineers days and weeks to complete.</p>
 <p>Large companies and highly regulated companies will need an auditable human-agent collaboration workflow. A spec driven workflow (even if the agent made updates) will give you that traceability to show exactly what was done, and why.</p>
-<h2>What's Hard &amp; Open Questions</h2>
+<h2><a href="#whats-hard--open-questions" aria-hidden="true" class="anchor" id="whats-hard--open-questions"></a>What's Hard &amp; Open Questions</h2>
 <p>Now this is by no means going to be easy and there are still some big open questions that need to be answered for how this could get done.</p>
 <ol>
 <li><strong>Policy language design</strong> - there's been some great work on this topic from Anthropic <a href="https://www.anthropic.com/constitution#acknowledgements">Claude Constitution</a>. As mentioned above I'd bet properly codifying the policy repository to steer the LLM toward a company's goal will be a crucial skill.</li>
@@ -123,7 +121,8 @@ Grain: one row per calendar_month × age_band × gender × lob × plan_type × r
 <li><strong>Agent reliability for complex transformations</strong> - This I'd bet gets solved by the continued model improvements in software development, but I think this perspective comes down to your confidence in the pace of model improvements.</li>
 </ol>
 <p>These tools are getting more powerful and capable every day, and the rate of progress has been mind blowing. I think there's a ton of work to be done to reorient how software development is done to best take advantage of these new tools. I can see a world where data and analytics no longer is constrained on data engineering effort, but rather deep understanding of the data and problems you are trying to solve.</p>
-<p>This is an opportunity where there is a clear need for tool and/or product to exist to take advantage of a new era of data engineering we're entering. If you're thinking about this problem, I'd love to talk: .</p>]]></description>
+<p>This is an opportunity where there is a clear need for tool and/or product to exist to take advantage of a new era of data engineering we're entering. If you're thinking about this problem, I'd love to talk: .</p>
+]]></description>
     </item>
     
     <item>
@@ -131,7 +130,8 @@ Grain: one row per calendar_month × age_band × gender × lob × plan_type × r
       <link>https://braceindustries.com/writing/welcome/</link>
       <guid>https://braceindustries.com/writing/welcome/</guid>
       <pubDate>Sat, 25 Oct 2025 00:00:00 GMT</pubDate>
-      <description><![CDATA[<p>This is a personal blog to showcase my work, and write about the things I'm interested in.</p>]]></description>
+      <description><![CDATA[<p>This is a personal blog to showcase my work, and write about the things I'm interested in.</p>
+]]></description>
     </item>
     
   </channel>

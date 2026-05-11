@@ -1,0 +1,28 @@
+[package]
+name = "brace-industries"
+version = "0.1.0"
+edition = "2021"
+description = "A minimal static site generator for personal blogs and project showcases"
+
+[[bin]]
+name = "brace"
+path = "src/main.rs"
+
+[lib]
+name = "brace"
+path = "src/lib.rs"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+tera = "1"
+comrak = "0.36"
+syntect = "5"
+serde = { version = "1", features = ["derive"] }
+serde_yml = "0.0.12"
+chrono = { version = "0.4", features = ["serde"] }
+anyhow = "1"
+notify = "7"
+notify-debouncer-mini = "0.5"
+tiny_http = "0.12"
+walkdir = "2"
+ctrlc = "3"
